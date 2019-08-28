@@ -13,35 +13,36 @@ private let reuseIdentifier = "Cell"
 
 
 class GalleryCVC: UICollectionViewController {
-    let urlImage = ["https://picsum.photos/id/73/200/300" : "200/300"
-        ,"https://picsum.photos/id/249/200/300" : "200/300"
-        ,"https://picsum.photos/id/888/200/300" : "200/300"
-        ,"https://picsum.photos/id/785/200/300" : "200/300"
-        ,"https://picsum.photos/id/874/200/300" : "200/300"
-        ,"https://picsum.photos/id/1077/200/300" : "200/300"
-        ,"https://picsum.photos/id/778/200/300" : "200/300"
-        ,"https://picsum.photos/id/774/200/300" : "200/300"
-        ,"https://picsum.photos/id/75/200/300" : "200/300"
-        ,"https://picsum.photos/id/558/200/300" : "200/300"
-        ,"https://picsum.photos/id/916/200/300" : "200/300"
-        ,"https://picsum.photos/id/260/200/300" : "200/300"
-        ,"https://picsum.photos/id/996/200/300" : "200/300"
-        ,"https://picsum.photos/id/276/200/300": "200/300"
-        ,"https://picsum.photos/id/545/200/300": "200/300"
-        ,"https://picsum.photos/id/839/200/300": "200/300"
-        ,"https://picsum.photos/id/896/200/300": "200/300"
-        ,"https://picsum.photos/id/100/200/300": "200/300"
-        ,"https://picsum.photos/id/611/200/300": "200/300"
-        ,"https://picsum.photos/id/465/200/300" : "200/300"]
+    var urlImage = ["https://picsum.photos/id/73/200/300"
+        ,"https://picsum.photos/id/249/200/300"
+        ,"https://picsum.photos/id/888/200/300"
+        ,"https://picsum.photos/id/785/200/300"
+        ,"https://picsum.photos/id/1077/200/300"
+        ,"https://picsum.photos/id/778/200/300"
+        ,"https://picsum.photos/id/774/200/300"
+        ,"https://picsum.photos/id/75/200/300"
+        ,"https://picsum.photos/id/558/200/300"
+        ,"https://picsum.photos/id/916/200/300"
+        ,"https://picsum.photos/id/260/200/300"
+        ,"https://picsum.photos/id/996/200/300"
+        ,"https://picsum.photos/id/276/200/300"
+        ,"https://picsum.photos/id/545/200/300"
+        ,"https://picsum.photos/id/839/200/300"
+        ,"https://picsum.photos/id/896/200/300"
+        ,"https://picsum.photos/id/100/200/300"
+        ,"https://picsum.photos/id/611/200/300"
+        ,"https://picsum.photos/id/465/200/300" ]
     
 
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         
         self.title = "MyGallery"
-
+        
     
     }
 
@@ -65,25 +66,44 @@ class GalleryCVC: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
+        
         return urlImage.count
+        
+        
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1), execute: {
+            if indexPath.row + 1 == self.urlImage.count  {
+                self.urlImage.append("https://picsum.photos/id/\(Int.random(in: 1...1000))/200/300")
+                collectionView.reloadData()
+                
+            }
+        })
+        
+       
      
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! MyCell
-        let currentImageUrl = urlImage.map{$0.key}
-        let currentDescription = urlImage.map{$0.value}
-        guard let url = URL(string: currentImageUrl[indexPath.row]) else {
+        let currentImageUrl = urlImage[indexPath.row]
+       
+       
+    
+        
+        guard let url = URL(string: currentImageUrl) else {
             return cell
         }
+        
+    
         
         cell.contentView.layer.cornerRadius = 5
         cell.contentView.layer.borderWidth = 1
         cell.contentView.layer.borderColor = #colorLiteral(red: 0.2439610064, green: 0.2440083027, blue: 0.2439548075, alpha: 1);
         cell.contentView.layer.masksToBounds = true
         
-        cell.textLabel.text = currentDescription[indexPath.row]
+        cell.textLabel.text = Date().easyDate(format:"MMMM yyyy")
         cell.imageView.sd_setImage(with: url, completed: nil)
+        
         
         
     
@@ -97,17 +117,17 @@ class GalleryCVC: UICollectionViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "goToPhotos"
         {
-            // Даём понять, что sender это ячейка класса MyCell
+            
             let cell: MyCell  = sender as! MyCell
             
-            // Получает объект image из текущей ячейки
             let image = cell.imageView.image
             
             
             let previewVC = segue.destination as! ViewController
-            
-            // Задаём контроллеру изображение с текущей ячейки
             previewVC.currentPhoto = image
+            previewVC.currenttext = Date().easyDate(format: "dd.MM.yyyy HH:mm:ss")
+            
+            
         }
     }
 
@@ -142,4 +162,12 @@ class GalleryCVC: UICollectionViewController {
     }
     */
 
+}
+
+extension Date {
+    func easyDate(format: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format
+        return formatter.string(from: self)
+    }
 }

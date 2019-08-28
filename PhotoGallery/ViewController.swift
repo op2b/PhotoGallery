@@ -10,12 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var someLabel: UILabel!
     @IBOutlet weak var imagePrewe: UIImageView!
     var currentPhoto : UIImage!
+    var currenttext = ""
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        someLabel.text = "We CASH it: " + currenttext
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
