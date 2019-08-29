@@ -71,6 +71,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-UM-0v0">
+                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" alpha="0.75" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jh8-So-TM9">
                                             <rect key="frame" x="0.0" y="159.66666666666666" width="180" height="20.333333333333343"/>
                                             <color key="backgroundColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
@@ -78,19 +82,15 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x9a-UM-0v0">
-                                            <rect key="frame" x="0.0" y="0.0" width="180" height="180"/>
-                                        </imageView>
                                     </subviews>
                                 </view>
                                 <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="jh8-So-TM9" secondAttribute="trailing" id="2Q9-OQ-wWj"/>
                                     <constraint firstAttribute="trailing" secondItem="jh8-So-TM9" secondAttribute="trailing" id="GoC-3S-tnp"/>
-                                    <constraint firstAttribute="bottom" secondItem="x9a-UM-0v0" secondAttribute="bottom" id="Ipr-8k-Iuc"/>
-                                    <constraint firstItem="x9a-UM-0v0" firstAttribute="top" secondItem="45F-TG-nxb" secondAttribute="top" id="RqF-dZ-Gdc"/>
-                                    <constraint firstItem="x9a-UM-0v0" firstAttribute="leading" secondItem="45F-TG-nxb" secondAttribute="leading" id="b2R-d7-SEW"/>
                                     <constraint firstItem="jh8-So-TM9" firstAttribute="leading" secondItem="45F-TG-nxb" secondAttribute="leading" id="eZH-sY-TvJ"/>
+                                    <constraint firstItem="jh8-So-TM9" firstAttribute="leading" secondItem="45F-TG-nxb" secondAttribute="leading" id="gkC-gx-fqe"/>
                                     <constraint firstAttribute="bottom" secondItem="jh8-So-TM9" secondAttribute="bottom" id="kp4-0x-PZX"/>
-                                    <constraint firstAttribute="trailing" secondItem="x9a-UM-0v0" secondAttribute="trailing" id="r1H-pH-32n"/>
+                                    <constraint firstAttribute="bottom" secondItem="jh8-So-TM9" secondAttribute="bottom" id="oz9-z0-zVp"/>
                                 </constraints>
                                 <size key="customSize" width="180" height="180"/>
                                 <connections>
